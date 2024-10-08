@@ -16,8 +16,9 @@ type PostgresDatabase struct {
 }
 
 func NewPostgresDatabase(connection_string string) *PostgresDatabase {
-	config, err := pgxpool.ParseConfig(connection_string )
-	if err != nil { fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
+	config, err := pgxpool.ParseConfig(connection_string)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
 	}
 	config.AfterConnect = func(context context.Context, conn *pgx.Conn) error {
@@ -25,8 +26,8 @@ func NewPostgresDatabase(connection_string string) *PostgresDatabase {
 		return err
 	}
 
-  config.MaxConns = 50
-  config.MinConns = 50
+	config.MaxConns = 50
+	config.MinConns = 50
 
 	pool, err := pgxpool.NewWithConfig(context.Background(), config)
 

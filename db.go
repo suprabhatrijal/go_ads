@@ -98,7 +98,6 @@ func (p *PostgresDatabase) GetAuctionResults(latitude int, longitude int, embedd
                           ads 
                           JOIN
                              (SELECT * FROM ads_geom WHERE geometry ~ ST_MakePoint($1,$2)) USING(adId) 
-                          ORDER BY bidAmount DESC 
                     )
                     ,
                     relevantAds AS 
